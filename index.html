@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌸 Pinkjulieju Store | วิธีการสั่งซื้อ</title>
+<title>🌸 Pinkjulieju Store | ระบบขายอัตโนมัติครบวงจร</title>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --pink-main: #ffb7c5;
     --pink-soft: #ffe4e8;
     --pink-deep: #ff85a1;
-    --yellow-star: #fff9c4;
     --white: #ffffff;
     --text: #4a4a4a;
     --shadow: 0 4px 20px rgba(255,183,197,0.25);
@@ -23,7 +22,6 @@
     min-height: 100vh; color: var(--text);
   }
 
-  /* HEADER */
   header {
     background: var(--white); padding: 20px; text-align: center;
     position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow);
@@ -31,7 +29,6 @@
   }
   header h1 { font-size: 1.7rem; color: var(--pink-deep); }
 
-  /* TABS */
   .tabs { display: flex; gap: 8px; padding: 15px; overflow-x: auto; background: rgba(255,255,255,0.5); scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
   .tab-btn {
@@ -41,16 +38,14 @@
   }
   .tab-btn.active { background: var(--pink-main); color: white; border-color: var(--pink-main); }
 
-  /* MAIN CONTENT */
   main { padding: 15px; max-width: 750px; margin: 0 auto; }
-  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section { display: none; }
   .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* HOW TO BUY STYLE */
-  .how-to-card { background: white; border-radius: 20px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 15px; border-left: 5px solid var(--pink-main); }
-  .step-num { width: 30px; height: 30px; background: var(--pink-deep); color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; }
-  .step-title { font-weight: 600; color: var(--pink-deep); margin-bottom: 8px; display: flex; align-items: center; }
+  /* HOW TO BUY */
+  .how-to-card { background: white; border-radius: 20px; padding: 15px; box-shadow: var(--shadow); margin-bottom: 10px; border-left: 5px solid var(--pink-main); }
+  .step-title { font-weight: 600; color: var(--pink-deep); display: flex; align-items: center; gap: 10px; }
+  .step-num { width: 24px; height: 24px; background: var(--pink-deep); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
 
   /* PRODUCT GRID */
   .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -58,52 +53,49 @@
     background: var(--white); border-radius: 20px; border: 1.5px solid var(--pink-soft);
     padding: 15px; text-align: center; transition: 0.3s; box-shadow: var(--shadow);
   }
-  .product-card:hover { transform: translateY(-4px); border-color: var(--pink-main); }
   .app-icon {
-    width: 55px; height: 55px; border-radius: 14px; background: #e50914;
+    width: 50px; height: 50px; border-radius: 12px; background: #e50914;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; font-weight: bold; color: white; margin: 0 auto 10px;
+    font-size: 1.5rem; font-weight: bold; color: white; margin: 0 auto 10px;
   }
-  .product-price { font-size: 1.3rem; font-weight: 700; color: var(--pink-deep); margin: 5px 0; }
+  .product-name { font-size: 0.85rem; font-weight: 600; height: 2.5em; overflow: hidden; line-height: 1.3; }
+  .product-price { font-size: 1.2rem; font-weight: 700; color: var(--pink-deep); margin: 8px 0; }
   
   .btn-buy {
-    width: 100%; padding: 10px; border-radius: 20px; border: none;
+    width: 100%; padding: 8px; border-radius: 15px; border: none;
     background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
     color: white; font-weight: 600; cursor: pointer;
   }
-  .btn-buy:disabled { background: #ddd; cursor: not-allowed; }
+  .btn-buy:disabled { background: #ddd; }
 
-  /* MODAL & QR */
+  /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: none; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
-  .modal { background: white; border-radius: 30px 30px 0 0; padding: 25px 20px; width: 100%; max-width: 500px; animation: slideUp 0.3s ease; max-height: 90vh; overflow-y: auto; }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .modal { background: white; border-radius: 30px 30px 0 0; padding: 25px 20px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
   .qr-box { background: var(--pink-soft); border: 2px dashed var(--pink-main); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 15px; }
   .verify-box { border-radius: 15px; padding: 15px; margin-bottom: 15px; text-align: center; display: none; }
   .verify-box.success { background: #d4f8e0; border: 2px solid #80ed99; display: block; }
   .verify-box.fail { background: #ffe0e6; border: 2px solid #ff85a1; display: block; }
-  .code-display { font-size: 1.2rem; font-weight: 700; background: white; padding: 15px; border-radius: 12px; border: 2px solid #80ed99; margin: 10px 0; }
+  .code-display { font-size: 1.1rem; font-weight: 700; background: white; padding: 15px; border-radius: 12px; border: 2px solid #80ed99; margin: 10px 0; word-break: break-all; }
 
-  /* ADMIN PANEL */
+  /* ADMIN */
   .admin-card { background: white; border-radius: 20px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 15px; }
   input, textarea, select { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid var(--pink-soft); margin-top: 5px; font-family: 'Kanit'; }
   .btn-main { width: 100%; padding: 14px; border-radius: 20px; border: none; background: var(--pink-deep); color: white; font-weight: 600; cursor: pointer; margin-top: 10px; }
 
-  /* FLOATING */
-  .float-contact { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; }
-  .float-btn { width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .float-btn { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; background: var(--pink-soft); box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body>
 
 <header>
   <h1>🌸 Pinkjulieju Store</h1>
-  <p>Premium Streaming • อัตโนมัติ 24 ชม. ✨</p>
+  <p>แอปพรีเมียม ส่งออโต้ 24 ชม. ✨</p>
 </header>
 
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('netflix')">🎬 เลือกซื้อสินค้า</button>
-  <button class="tab-btn" onclick="switchTab('howto')">📖 วิธีการสั่งซื้อ</button>
+  <button class="tab-btn" onclick="switchTab('howto')">📖 วิธีสั่งซื้อ</button>
   <button class="tab-btn" onclick="switchTab('orders')">📋 ประวัติการซื้อ</button>
 </div>
 
@@ -113,25 +105,10 @@
   </div>
 
   <div class="section" id="tab-howto">
-    <div class="how-to-card">
-      <div class="step-title"><span class="step-num">1</span> เลือกสินค้าที่ต้องการ</div>
-      <p style="font-size: 0.9rem; color: #666;">เลือกโปรโมชันที่คุณต้องการซื้อ แล้วกดปุ่ม "สั่งซื้อ 🛒"</p>
-    </div>
-    <div class="how-to-card">
-      <div class="step-title"><span class="step-num">2</span> ชำระเงินผ่าน QR Code</div>
-      <p style="font-size: 0.9rem; color: #666;">สแกน QR Code หรือโอนเข้าบัญชีพร้อมเพย์ที่ระบบแจ้ง (แนะนำให้โอนยอดตรงเป๊ะๆ นะคะ)</p>
-    </div>
-    <div class="how-to-card">
-      <div class="step-title"><span class="step-num">3</span> อัปโหลดสลิปเพื่อตรวจสอบ</div>
-      <p style="font-size: 0.9rem; color: #666;">กดปุ่มอัปโหลดสลิป แล้วรอระบบตรวจสอบความถูกต้องสักครู่ค่ะ ✨</p>
-    </div>
-    <div class="how-to-card">
-      <div class="step-title"><span class="step-num">4</span> รับรหัสใช้งานทันที!</div>
-      <p style="font-size: 0.9rem; color: #666;">เมื่อสลิปผ่าน ระบบจะแสดง "รหัส/อีเมล" ให้คุณคัดลอกไปใช้ได้เลยค่ะ</p>
-    </div>
-    <div style="text-align: center; margin-top: 20px; color: var(--pink-deep);">
-      <p>มีปัญหาการสั่งซื้อ ทักแชทหาแอดมินได้ตลอดนะคะ 💖</p>
-    </div>
+    <div class="how-to-card"><div class="step-title"><span class="step-num">1</span> เลือกแอปที่ต้องการ</div></div>
+    <div class="how-to-card"><div class="step-title"><span class="step-num">2</span> โอนเงินผ่าน QR Code/พร้อมเพย์</div></div>
+    <div class="how-to-card"><div class="step-title"><span class="step-num">3</span> อัปโหลดสลิปที่หน้าระบบ</div></div>
+    <div class="how-to-card"><div class="step-title"><span class="step-num">4</span> รับรหัสใช้งานได้ทันที 💖</div></div>
   </div>
 
   <div class="section" id="tab-orders">
@@ -141,22 +118,21 @@
   <div class="section" id="tab-admin">
     <div id="admin-login-form" class="admin-card">
       <h3 style="text-align:center">🔐 Admin Access</h3>
-      <input type="password" id="admin-pass-input" placeholder="รหัสผ่านแอดมิน">
+      <input type="password" id="admin-pass-input" placeholder="รหัสผ่าน">
       <button class="btn-main" onclick="adminLogin()">เข้าสู่ระบบ</button>
     </div>
     <div id="admin-dashboard" style="display:none">
       <div class="admin-card">
-        <h3>⚙️ ตั้งค่า API (SLIPOKKY)</h3>
-        <input type="text" id="api-key-input" placeholder="ใส่ API Key ของคุณ">
-        <button class="btn-main" onclick="saveSettings()" style="background:#80ed99">💾 บันทึก API Key</button>
+        <h3>⚙️ ตั้งค่า API SLIPOKKY</h3>
+        <input type="text" id="api-key-input" placeholder="ใส่ API Key">
+        <button class="btn-main" onclick="saveSettings()" style="background:#80ed99">💾 บันทึก</button>
       </div>
       <div class="admin-card">
-        <h3>➕ เติมสต็อกสินค้า</h3>
+        <h3>➕ เติมสต็อก</h3>
         <select id="admin-product-select"></select>
         <textarea id="admin-codes-input" rows="5" placeholder="ใส่รหัส (1 บรรทัดต่อ 1 รหัส)"></textarea>
-        <button class="btn-main" onclick="adminAddCodes()">✅ ยืนยันเติมสต็อก</button>
+        <button class="btn-main" onclick="adminAddCodes()">✅ เติมสต็อก</button>
       </div>
-      <button class="btn-main" style="background:#ff6b6b" onclick="location.reload()">🚪 ออกจากระบบ</button>
     </div>
   </div>
 </main>
@@ -167,35 +143,36 @@
     <div class="qr-box">
       <div id="qr-display"></div>
       <p style="margin-top:10px">พร้อมเพย์: <strong id="display-promptpay"></strong></p>
-      <p id="display-accname" style="font-size:0.9rem; color:#888"></p>
+      <p id="display-accname" style="font-size:0.8rem; color:#888"></p>
     </div>
-    
     <input type="file" id="slip-file" accept="image/*" onchange="handleSlipUpload(event)" style="display:none">
-    <button class="btn-main" style="background:var(--pink-soft); color:var(--pink-deep)" onclick="document.getElementById('slip-file').click()">
-      📸 อัปโหลดสลิปที่นี่
-    </button>
+    <button class="btn-main" style="background:var(--pink-soft); color:var(--pink-deep)" onclick="document.getElementById('slip-file').click()">📸 อัปโหลดสลิป</button>
     <img id="slip-preview-img" style="width:100%; border-radius:15px; margin:15px 0; display:none">
-
     <div class="verify-box" id="verify-result"></div>
-    <button class="btn-main" id="btn-verify" onclick="verifySlip()" disabled>🔍 ตรวจสอบสลิปและรับรหัส</button>
+    <button class="btn-main" id="btn-verify" onclick="verifySlip()" disabled>🔍 ตรวจสอบสลิป</button>
     <button class="btn-main" style="background:none; color:#999" onclick="closeModal()">ปิดหน้าต่าง</button>
   </div>
 </div>
 
-<div class="float-contact">
-  <button class="float-btn" style="background:var(--pink-soft)" onclick="switchTab('admin')">⚙️</button>
-  <button class="float-btn" style="background:#06c755; color:white" onclick="window.open('https://line.me/ti/p/~@yourid')">💬</button>
-</div>
+<button class="float-btn" onclick="switchTab('admin')">⚙️</button>
 
 <script>
-// (Logic JavaScript เดิมทั้งหมดถูกรวมไว้ที่นี่ ไม่มีการตัดออกค่ะ)
-const STORE_KEY = 'pinkjulieju_v2_data';
+const STORE_KEY = 'pinkjulieju_final_db';
 let DB = JSON.parse(localStorage.getItem(STORE_KEY)) || {
   settings: { promptpay: '0812345678', accname: 'ชื่อบัญชีของคุณ', adminPass: 'admin1234', apiKey: '' },
   products: [
-    { id: 'nf1', name: 'Netflix 1 Day', price: 16, codes: [] },
-    { id: 'nf7', name: 'Netflix 7 Days', price: 46, codes: [] },
-    { id: 'nf30', name: 'Netflix 30 Days', price: 120, codes: [] }
+    { id: 'nf_m_1', name: 'Netflix มือถือ/คอม (1 Day)', price: 16, codes: [] },
+    { id: 'nf_m_7', name: 'Netflix มือถือ/คอม (7 Days)', price: 46, codes: [] },
+    { id: 'nf_m_30', name: 'Netflix มือถือ/คอม (30 Days)', price: 120, codes: [] },
+    { id: 'nf_tv_1', name: 'Netflix ทีวี (1 Day)', price: 26, codes: [] },
+    { id: 'nf_tv_7', name: 'Netflix ทีวี (7 Days)', price: 69, codes: [] },
+    { id: 'nf_tv_30', name: 'Netflix ทีที (30 Days)', price: 219, codes: [] },
+    { id: 'nf_mc_1', name: 'Netflix มือถือ/คอม ปิดเคลม (1 Day)', price: 26, codes: [] },
+    { id: 'nf_mc_7', name: 'Netflix มือถือ/คอม ปิดเคลม (7 Days)', price: 55, codes: [] },
+    { id: 'nf_mc_30', name: 'Netflix มือถือ/คอม ปิดเคลม (30 Days)', price: 125, codes: [] },
+    { id: 'nf_tvc_1', name: 'Netflix ทีวี ปิดเคลม (1 Day)', price: 33, codes: [] },
+    { id: 'nf_tvc_7', name: 'Netflix ทีวี ปิดเคลม (7 Days)', price: 74, codes: [] },
+    { id: 'nf_tvc_30', name: 'Netflix ทีวี ปิดเคลม (30 Days)', price: 225, codes: [] }
   ],
   orders: [],
   verifiedSlips: []
@@ -211,7 +188,7 @@ function renderProducts() {
   grid.innerHTML = DB.products.map(p => `
     <div class="product-card">
       <div class="app-icon">N</div>
-      <div style="font-weight:600; font-size:0.9rem">${p.name}</div>
+      <div class="product-name">${p.name}</div>
       <div class="product-price">${p.price}฿</div>
       <button class="btn-buy" ${p.codes.length === 0 ? 'disabled' : ''} onclick="openOrder('${p.id}')">
         ${p.codes.length === 0 ? 'หมด' : 'สั่งซื้อ'} (${p.codes.length})
@@ -242,8 +219,8 @@ function handleSlipUpload(e) {
 async function verifySlip() {
   const btn = document.getElementById('btn-verify');
   const resultBox = document.getElementById('verify-result');
-  if(!DB.settings.apiKey) { alert('แอดมินยังไม่ได้ตั้งค่า API Key ค่ะ'); return; }
-  btn.innerText = '⏳ กำลังตรวจสอบ...';
+  if(!DB.settings.apiKey) { alert('แอดมินยังไม่ได้ใส่ API Key'); return; }
+  btn.innerText = '⏳ กำลังตรวจ...';
   btn.disabled = true;
 
   try {
@@ -254,7 +231,7 @@ async function verifySlip() {
     });
     const res = await response.json();
     if (res.success) {
-      if (DB.verifiedSlips.includes(res.data.transId)) throw new Error('❌ สลิปนี้ใช้ไปแล้ว!');
+      if (DB.verifiedSlips.includes(res.data.transId)) throw new Error('สลิปนี้ใช้ไปแล้ว');
       const deliveredCode = currentProduct.codes.shift();
       DB.orders.unshift({ name: currentProduct.name, code: deliveredCode, date: new Date().toLocaleString() });
       DB.verifiedSlips.push(res.data.transId);
@@ -262,12 +239,11 @@ async function verifySlip() {
       resultBox.className = 'verify-box success';
       resultBox.innerHTML = `✅ สำเร็จ!<br><div class="code-display">${deliveredCode}</div>`;
       renderProducts();
-    } else { throw new Error(res.message || '❌ สลิปไม่ถูกต้อง'); }
+    } else { throw new Error(res.message || 'สลิปไม่ถูกต้อง'); }
   } catch (err) {
     resultBox.className = 'verify-box fail';
     resultBox.innerText = err.message;
     btn.disabled = false;
-    btn.innerText = '🔍 ลองตรวจสอบอีกครั้ง';
   }
 }
 
@@ -278,13 +254,10 @@ function adminLogin() {
     document.getElementById('api-key-input').value = DB.settings.apiKey;
     const sel = document.getElementById('admin-product-select');
     sel.innerHTML = DB.products.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-  } else { alert('รหัสผิดค่ะ!'); }
+  } else { alert('รหัสผิด'); }
 }
 
-function saveSettings() {
-  DB.settings.apiKey = document.getElementById('api-key-input').value;
-  saveData(); alert('บันทึก API Key แล้ว!');
-}
+function saveSettings() { DB.settings.apiKey = document.getElementById('api-key-input').value; saveData(); alert('บันทึกแล้ว'); }
 
 function adminAddCodes() {
   const id = document.getElementById('admin-product-select').value;
@@ -292,13 +265,13 @@ function adminAddCodes() {
   DB.products.find(p => p.id === id).codes.push(...codes);
   saveData(); renderProducts();
   document.getElementById('admin-codes-input').value = '';
-  alert('เติมสต็อกเรียบร้อย!');
+  alert('เติมแล้ว ' + codes.length + ' รายการ');
 }
 
 function switchTab(t) {
   document.querySelectorAll('.section, .tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + t).classList.add('active');
-  const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.innerText.includes(t === 'netflix' ? 'เลือกซื้อ' : t === 'howto' ? 'วิธี' : 'ประวัติ'));
+  const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.innerText.includes(t==='netflix'?'ซื้อ':t==='howto'?'วิธี':'ประวัติ'));
   if(btn) btn.classList.add('active');
 }
 
